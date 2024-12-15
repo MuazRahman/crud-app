@@ -23,13 +23,6 @@ CRUDApp is a mobile application developed using Flutter framework and Dart progr
 
 Follow these steps to get the app up and running on your local machine:
 
-### Prerequisites
-
-- **Install Flutter SDK**:  [Flutter SDK version 3.24.3 stable](https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.24.3-stable.zip)
-- **Install Dart SDK**: [Dart SDK version 3.5.3 stable (Architecture x64)](https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.3/sdk/dartsdk-windows-x64-release.zip)
-- Any text editor or IDE (Visual Studio Code or Android Studio recommended)
-- **DevTools**: 2.37.3
-- **Windows version**: 10.0 or Upper
 
 ### Installation
 
@@ -38,6 +31,14 @@ Follow these steps to get the app up and running on your local machine:
    ```bash
    git clone https://github.com/yourusername/CRUDApp.git
    ```
+
+### Prerequisites
+
+- **Install Flutter SDK**:  [Flutter SDK version 3.24.3 stable](https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.24.3-stable.zip)
+- **Install Dart SDK**: [Dart SDK version 3.5.3 stable (Architecture x64)](https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.3/sdk/dartsdk-windows-x64-release.zip)
+- Any text editor or IDE (Visual Studio Code or Android Studio recommended)
+- **DevTools**: 2.37.3
+- **Windows version**: 10.0 or Upper
 
 2. Navigate into the project directory:
 
