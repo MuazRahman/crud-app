@@ -69,49 +69,9 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
-          const SizedBox(height: 15,),
-          TextFormField(
-            controller: _priceTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Price', labelText: 'Product Price'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product price';
-              } else {
-                return null;
-              }
-            },
+          const SizedBox(
+            height: 15,
           ),
-          const SizedBox(height: 15,),
-          TextFormField(
-            controller: _totalPriceTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Total Price', labelText: 'Product Total Price'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product total price';
-              } else {
-                return null;
-              }
-            },
-          ),
-          const SizedBox(height: 15,),
-          TextFormField(
-            controller: _quantityTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Quantity', labelText: 'Product Quantity'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product quantity';
-              } else {
-                return null;
-              }
-            },
-          ),
-          const SizedBox(height: 15,),
           TextFormField(
             controller: _codeTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -125,7 +85,57 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
+          TextFormField(
+            controller: _quantityTEController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            decoration: const InputDecoration(
+                hintText: 'Quantity', labelText: 'Product Quantity'),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter product quantity';
+              } else {
+                return null;
+              }
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          TextFormField(
+            controller: _priceTEController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            decoration: const InputDecoration(
+                hintText: 'Price', labelText: 'Product Price'),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter product price';
+              } else {
+                return null;
+              }
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          TextFormField(
+            controller: _totalPriceTEController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            decoration: const InputDecoration(
+                hintText: 'Total Price', labelText: 'Product Total Price'),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter product total price';
+              } else {
+                return null;
+              }
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
           TextFormField(
             controller: _imageTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -139,7 +149,9 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           const SizedBox(
             height: 16,
           ),

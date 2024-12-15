@@ -55,37 +55,25 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           TextFormField(
-            controller: _priceTEController,
+            controller: _codeTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-                hintText: 'Price', labelText: 'Product Price'),
+                hintText: 'Code', labelText: 'Product Code'),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
-                return 'Enter product price';
+                return 'Enter product code';
               } else {
                 return null;
               }
             },
           ),
-          const SizedBox(height: 15,),
-          TextFormField(
-            controller: _totalPriceTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-                hintText: 'Total Price', labelText: 'Product Total Price'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product total price';
-              } else {
-                return null;
-              }
-            },
+          const SizedBox(
+            height: 15,
           ),
-          const SizedBox(height: 15,),
           TextFormField(
             controller: _quantityTEController,
             keyboardType: TextInputType.number,
@@ -100,21 +88,43 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           TextFormField(
-            controller: _codeTEController,
+            controller: _priceTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-                hintText: 'Code', labelText: 'Product Code'),
+                hintText: 'Price', labelText: 'Product Price'),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
-                return 'Enter product code';
+                return 'Enter product price';
               } else {
                 return null;
               }
             },
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
+          TextFormField(
+            controller: _totalPriceTEController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+                hintText: 'Total Price', labelText: 'Product Total Price'),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter product total price';
+              } else {
+                return null;
+              }
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
           TextFormField(
             controller: _imageTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -128,7 +138,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           const SizedBox(
             height: 16,
           ),
