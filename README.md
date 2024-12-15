@@ -1,6 +1,3 @@
-Here’s the updated `README.md` with the "Getting Started" and "Prerequisites" sections added before the License:
-
-
 # CRUDApp
 
 CRUDApp is a mobile application developed using Flutter framework and Dart programming language. The app allows users to create, read, update, and delete product items. It communicates with an API to fetch and manage data related to products.
