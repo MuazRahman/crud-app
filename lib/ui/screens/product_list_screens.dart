@@ -29,7 +29,10 @@ class _ProductListScreensState extends State<ProductListScreens> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product List'),
+        title: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text('Product List',),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async {

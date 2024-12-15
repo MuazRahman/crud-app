@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crud_app/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 
 class DeleteProductScreen extends StatefulWidget {
@@ -36,6 +37,13 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
     _codeTEController.text = widget.product.productCode ?? '';
   }
 
+  Widget customText({required String text}) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,101 +62,77 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
   Widget _buildProductForm() {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          TextFormField(
-            controller: _nameTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Name', labelText: 'Product Name'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product name';
-              } else {
-                return null;
-              }
-            },
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: SizedBox(
+            width: double.infinity,
+            height: MediaQuery.sizeOf(context).height * 0.8,
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 25.0,
+                  ),
+                  SizedBox(
+                    height: 180,
+                    width: 180,
+                    child: Image.network(_imageTEController.text),
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      customText(
+                          text: 'Product Name: ${_nameTEController.text}'),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      customText(
+                          text: 'Product Code: ${_codeTEController.text}'),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      customText(
+                          text:
+                              'Product Quantity: ${_quantityTEController.text}'),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      customText(
+                          text: 'Product Price: ${_priceTEController.text}'),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      customText(
+                          text:
+                              'Product Total Price: ${_totalPriceTEController.text}'),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Visibility(
+                    visible: _deleteProductInProgress == false,
+                    replacement: const CircularProgressIndicator(),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _updateProduct();
+                        }
+                      },
+                      style:
+                          ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                      child: const Text('Delete Product'),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
-          TextFormField(
-            controller: _priceTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Price', labelText: 'Product Price'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product price';
-              } else {
-                return null;
-              }
-            },
-          ),
-          TextFormField(
-            controller: _totalPriceTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Total Price', labelText: 'Product Total Price'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product total price';
-              } else {
-                return null;
-              }
-            },
-          ),
-          TextFormField(
-            controller: _quantityTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Quantity', labelText: 'Product Quantity'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product quantity';
-              } else {
-                return null;
-              }
-            },
-          ),
-          TextFormField(
-            controller: _codeTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Code', labelText: 'Product Code'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product code';
-              } else {
-                return null;
-              }
-            },
-          ),
-          TextFormField(
-            controller: _imageTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-                hintText: 'Image URL', labelText: 'Product Image'),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter product image';
-              } else {
-                return null;
-              }
-            },
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Visibility(
-            visible: _deleteProductInProgress == false,
-            replacement: const CircularProgressIndicator(),
-            child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _updateProduct();
-                  }
-                },
-                child: const Text('Delete Product')),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -160,7 +144,7 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
         'https://crud.teamrabbil.com/api/v1/DeleteProduct/${widget.product.id}');
     Response response = await get(uri);
 
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       final decodedData = jsonDecode(response.body);
       Map<String, dynamic> requestBode = {
         "ProductName": _nameTEController.text.trim(),
@@ -174,11 +158,12 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
 
     _deleteProductInProgress = false;
     setState(() {});
-    if(response.statusCode == 200){
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product has been deleted')));
-    }
-    else{
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product delete failed! Try again')));
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Product has been deleted')));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Product delete failed! Try again')));
     }
   }
 

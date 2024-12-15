@@ -55,6 +55,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _priceTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -69,6 +70,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _totalPriceTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -83,6 +85,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _quantityTEController,
             keyboardType: TextInputType.number,
@@ -97,6 +100,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _codeTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -110,6 +114,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _imageTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -123,6 +128,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           const SizedBox(
             height: 16,
           ),
@@ -130,12 +136,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
             visible: _addNewProductInProgress == false,
             replacement: const CircularProgressIndicator(),
             child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _addNewProduct();
-                  }
-                },
-                child: const Text('Add Product')),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _addNewProduct();
+                }
+              },
+              child: const Text('Add Product'),
+            ),
           )
         ],
       ),
@@ -160,10 +167,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       headers: {'Content-type': 'application/json'},
       body: jsonEncode(requestBody),
     );
-    print(response.statusCode);
-    print(response.body);
     _addNewProductInProgress = false;
-    setState(() { });
+    setState(() {});
     if (response.statusCode == 200) {
       _clearTextField();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -171,8 +176,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           content: Text('New Product Added!'),
         ),
       );
-    }
-    else{
+    } else {
       const SnackBar(
         content: Text('Product Addition failed! Try again'),
       );

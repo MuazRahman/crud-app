@@ -69,6 +69,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _priceTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -82,6 +83,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _totalPriceTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -95,6 +97,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _quantityTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -108,6 +111,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _codeTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -121,6 +125,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           TextFormField(
             controller: _imageTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -134,6 +139,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               }
             },
           ),
+          const SizedBox(height: 15,),
           const SizedBox(
             height: 16,
           ),
@@ -141,12 +147,15 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             visible: _updateProductInProgress == false,
             replacement: const CircularProgressIndicator(),
             child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _updateProduct();
-                  }
-                },
-                child: const Text('Update Product')),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _updateProduct();
+                }
+              },
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+              child: const Text('Update Product'),
+            ),
           )
         ],
       ),
@@ -168,17 +177,17 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
       "TotalPrice": _totalPriceTEController.text.trim(),
     };
 
-    Response response = await post(
-        uri,
+    Response response = await post(uri,
         headers: {'Content-type': 'application/json'},
         body: jsonEncode(requestBode));
     _updateProductInProgress = false;
     setState(() {});
-    if(response.statusCode == 200){
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product has been updated')));
-    }
-    else{
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product update failed! Try again')));
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Product has been updated')));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Product update failed! Try again')));
     }
   }
 

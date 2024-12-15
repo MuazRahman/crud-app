@@ -2,7 +2,9 @@ import 'package:crud_app/ui/screens/add_new_product_screen.dart';
 import 'package:crud_app/ui/screens/delete_product_screen.dart';
 import 'package:crud_app/ui/screens/product_list_screens.dart';
 import 'package:crud_app/ui/screens/update_product_screen.dart';
+import 'package:crud_app/ui/widgets/theme_data.dart';
 import 'package:flutter/material.dart';
+
 
 import 'models/product.dart';
 
@@ -12,6 +14,9 @@ class CRUDApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: CustomThemeData.theme,
+
       initialRoute: '/',
       onGenerateRoute: (RouteSettings settings) {
         late Widget widget;
