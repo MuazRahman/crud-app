@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:crud_app/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,10 +37,7 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
   }
 
   Widget customText({required String text}) {
-    return Text(
-      text,
-      style: GoogleFonts.poppins(),
-    );
+    return Text(text, style: GoogleFonts.poppins());
   }
 
   @override
@@ -72,9 +68,7 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 25.0,
-                  ),
+                  const SizedBox(height: 25.0),
                   SizedBox(
                     height: 180,
                     width: 180,
@@ -82,49 +76,29 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
                   ),
                   Column(
                     children: [
-                      const SizedBox(
-                        height: 16.0,
-                      ),
-                      customText(
-                          text: 'Product Name: ${_nameTEController.text}'),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      customText(
-                          text: 'Product Code: ${_codeTEController.text}'),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      customText(
-                          text:
-                              'Product Quantity: ${_quantityTEController.text}'),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      customText(
-                          text: 'Product Price: ${_priceTEController.text}'),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      customText(
-                          text:
-                              'Product Total Price: ${_totalPriceTEController.text}'),
+                      const SizedBox(height: 16.0),
+                      customText(text: 'Product Name: ${_nameTEController.text}'),
+                      const SizedBox(height: 5.0),
+                      customText(text: 'Product Code: ${_codeTEController.text}'),
+                      const SizedBox(height: 5.0),
+                      customText(text: 'Product Quantity: ${_quantityTEController.text}'),
+                      const SizedBox(height: 5.0),
+                      customText(text: 'Product Price: ${_priceTEController.text}'),
+                      const SizedBox(height: 5.0),
+                      customText(text: 'Product Total Price: ${_totalPriceTEController.text}'),
                     ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                   Visibility(
-                    visible: _deleteProductInProgress == false,
+                    visible: !_deleteProductInProgress,
                     replacement: const CircularProgressIndicator(),
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          _updateProduct();
+                          _deleteProduct();
                         }
                       },
-                      style:
-                          ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                       child: const Text('Delete Product'),
                     ),
                   )
@@ -137,44 +111,33 @@ class _DeleteProductScreenState extends State<DeleteProductScreen> {
     );
   }
 
-  Future<void> _updateProduct() async {
-    _deleteProductInProgress = true;
-    setState(() {});
-    Uri uri = Uri.parse(
-        'https://crud.teamrabbil.com/api/v1/DeleteProduct/${widget.product.id}');
+  Future<void> _deleteProduct() async {
+    setState(() {
+      _deleteProductInProgress = true;
+    });
+
+    Uri uri = Uri.parse('https://crud.teamrabbil.com/api/v1/DeleteProduct/${widget.product.id}');
     Response response = await get(uri);
 
-    if (response.statusCode == 200) {
-      final decodedData = jsonDecode(response.body);
-      Map<String, dynamic> requestBode = {
-        "ProductName": _nameTEController.text.trim(),
-        "ProductCode": _codeTEController.text.trim(),
-        "Img": _imageTEController.text.trim(),
-        "UnitPrice": _priceTEController.text.trim(),
-        "Qty": _quantityTEController.text.trim(),
-        "TotalPrice": _totalPriceTEController.text.trim(),
-      };
-    }
+    setState(() {
+      _deleteProductInProgress = false;
+    });
 
-    _deleteProductInProgress = false;
-    setState(() {});
     if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Product has been deleted')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product has been deleted')));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Product delete failed! Try again')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product delete failed! Try again')));
     }
   }
 
   @override
   void dispose() {
-    super.dispose();
     _nameTEController.dispose();
     _priceTEController.dispose();
     _totalPriceTEController.dispose();
     _quantityTEController.dispose();
     _codeTEController.dispose();
     _imageTEController.dispose();
+    super.dispose();
   }
 }
